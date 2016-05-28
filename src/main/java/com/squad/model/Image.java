@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Blob;
 
 @Entity
-@Table(name = "feature")
+@Table(name = "images")
 public class Image {
 
     @Id
@@ -12,15 +12,16 @@ public class Image {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "idOffers")
-    private Integer offerId;
+    @ManyToOne
+    @JoinColumn(name="idOffers", nullable=false)
+    private Offer offer;
 
     @Column(name = "image", nullable = false)
     private Blob image;
 
-    public Image(int id, Integer offerId, Blob image) {
+    public Image(int id, Offer offer, Blob image) {
         this.id = id;
-        this.offerId = offerId;
+        this.offer = offer;
         this.image = image;
     }
 
@@ -35,12 +36,12 @@ public class Image {
         this.id = id;
     }
 
-    public Integer getOfferId() {
-        return offerId;
+    public Offer getOffer() {
+        return offer;
     }
 
-    public void setOfferId(Integer offerId) {
-        this.offerId = offerId;
+    public void setOffer(Offer offer) {
+        this.offer = offer;
     }
 
     public Blob getImage() {
