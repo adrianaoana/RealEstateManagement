@@ -37,6 +37,8 @@ public class MainController {
 	public static final String ORDER = "order";
 	public static final String TYPE = "type";
 	public static final String PROPERTY_TYPE = "ptype";
+	public static final String BEGIN_PRICE = "bp";
+	public static final String LIMIT_PRICE = "lp";
 
 	/* PAGES */
 	public static final String INDEX_JSP = "index";

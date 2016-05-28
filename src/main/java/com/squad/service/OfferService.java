@@ -16,9 +16,10 @@ public interface OfferService {
 
 	public Offer getOfferById(int idOffer);
 
-	public Long getByPageFilterBySearchSize(String type, String propertyType, String search);
+	public Long getByPageFilterBySearchSize(String type, String propertyType, String beginPrice, String limitPrice,
+			String search);
 
-	public Object getByPageFilterBySearch(String type, String propertyType, String search, String order, int i,
-			Integer recordsPerPage);
+	public Object getByPageFilterBySearch(String type, String propertyType, String beginPrice, String limitPrice,
+			String search, String order, Integer offset, Integer recordsPerPage);
 
 }

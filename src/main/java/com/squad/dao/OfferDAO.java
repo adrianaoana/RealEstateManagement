@@ -14,4 +14,16 @@ public interface OfferDAO {
     public List<Offer> getAll();
 
     public Offer getOfferById(int idOffer);
+
+	public Long getByPageFilterSize(String type, String propertyType, String beginPrice, String limitPrice);
+
+	public Long getByPageFilterBySearchSize(String type, String propertyType, String beginPrice, String limitPrice,
+			String search);
+
+	public List<Offer> getByPageFilterOrder(String type, String propertyType, String beginPrice, String limitPrice,
+			String order, Integer offset, Integer recordsPerPage);
+
+	public List<Offer> getByPageFilterOrderSearch(String type, String propertyType, String beginPrice,
+			String limitPrice, String search, String order, Integer offset, Integer recordsPerPage);
+
 }

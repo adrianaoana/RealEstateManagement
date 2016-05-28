@@ -41,57 +41,87 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="input-group">
-						<input type="text" class="form-control"
-							placeholder="Search for..."> <span
-							class="input-group-btn">
-							<button class="btn btn-default" type="button">
-								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-								Search
-							</button>
-						</span>
-					</div>
-					<!-- /input-group -->
-					<div style="display: inline-flex">
-						<div class="dropdown">
-							<button class="btn btn-default dropdown-toggle" type="button"
-								id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="true">
-								Type <span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-								<li><a href="#">Apartament</a></li>
-								<li><a href="#">House</a></li>
-								<li><a href="#">Land</a></li>
-							</ul>
+
+					<form method="get"
+						action="${CONTEXT_PATH}/offers?order=${order}&sch=${sch}&type=${type}&ptype=${ptype}&bp=${bp}&lp=${lp}"
+						name="searchForm">
+						<div class="input-group">
+							<input type="text" class="form-control" name="sch" value="${sch}"
+								placeholder="Search for..."> <span
+								class="input-group-btn">
+								<button class="btn btn-default" type="submit">
+									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+									Search
+								</button>
+							</span>
 						</div>
-						<div class="dropdown">
-							<button class="btn btn-default dropdown-toggle" type="button"
-								id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="true">
-								Room no <span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4+</a></li>
-							</ul>
+						<!-- /input-group -->
+
+						<div style="display: inline-flex; padding-top: 1px;">
+							<div class="dropdown">
+								<select name="ptype" class="form-control" title="Property type">
+									<c:choose>
+										<c:when test="${empty ptype}">
+											<option value="" selected="selected">Property type</option>
+										</c:when>
+										<c:otherwise>
+											<option value="">Property type</option>
+										</c:otherwise>
+									</c:choose>
+									<c:choose>
+										<c:when test="${ptype eq 'House'}">
+											<option value="${ptype}" selected="selected">${ptype}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="House">House</option>
+										</c:otherwise>
+									</c:choose>
+									<c:choose>
+										<c:when test="${ptype eq 'Apartment'}">
+											<option value="${ptype}" selected="selected">${ptype}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="Apartment">Apartment</option>
+										</c:otherwise>
+									</c:choose>
+									<c:choose>
+										<c:when test="${ptype eq 'Studio'}">
+											<option value="${ptype}" selected="selected">${ptype}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="Studio">Studio</option>
+										</c:otherwise>
+									</c:choose>
+									<c:choose>
+										<c:when test="${ptype eq 'Land'}">
+											<option value="${ptype}" selected="selected">${ptype}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="Land">Land</option>
+										</c:otherwise>
+									</c:choose>
+								</select>
+							</div>
+							<div class="dropdown">
+								<select name="area" class="form-control" title="Areas">
+									<option value="" selected="selected">Areas</option>
+									<option value="">Centru</option>
+									<option value="">Gheorgheni</option>
+									<option value="">Manastur</option>
+									<option value="">Zorilor</option>
+								</select>
+							</div>
+							<div class="dropdown">
+								<select name="room" class="form-control" title="Room number">
+									<option value="" selected="selected">Room no</option>
+									<option value="">1</option>
+									<option value="">2</option>
+									<option value="">3</option>
+									<option value="">More than 3</option>
+								</select>
+							</div>
 						</div>
-						<div class="dropdown">
-							<button class="btn btn-default dropdown-toggle" type="button"
-								id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="true">
-								Areas <span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
-								<li><a href="#">Manastur</a></li>
-								<li><a href="#">Gheorgheni</a></li>
-								<li><a href="#">Centru</a></li>
-								<li><a href="#">Zorilor</a></li>
-							</ul>
-						</div>
-					</div>
+					</form>
 				</div>
 			</div>
 			<div align="center" class="row">
