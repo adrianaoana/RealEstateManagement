@@ -1,34 +1,47 @@
 package com.squad.model;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "offers")
 public class Offer implements java.io.Serializable {
     @Column(name = "type")
+
     private String type;
-    @Column(name = "idFeatures")
-    private int idFeatures;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", nullable = false)
+    private Feature feature;
+
+    @OneToMany(cascade = CascadeType.ALL )
+    @JoinTable(name = "images", joinColumns = { @JoinColumn(name = "idOffers") })
+    List<Image> images;
+
+
     @Column(name = "price")
     private String price;
     @Column(name = "idAddresses")
     private int idAddresses;
     @Column(name = "emailUser")
     private String emailUser;
+
     @Id
-    @Column(name = "idOffers")
-    private int idOffers;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private int id;
 
-    public Offer() {
-
-    }
-
-    public Offer(String type, int idFeatures, String price, int idAddresses, String emailUser, int idOffers) {
+    public Offer(String type, Feature feature, String price, int idAddresses, String emailUser, int id) {
         this.type = type;
-        this.idFeatures = idFeatures;
+        this.feature = feature;
         this.price = price;
         this.idAddresses = idAddresses;
         this.emailUser = emailUser;
-        this.idOffers = idOffers;
+        this.id = id;
+    }
+
+    public Offer() {
     }
 
     public String getType() {
@@ -39,28 +52,12 @@ public class Offer implements java.io.Serializable {
         this.type = type;
     }
 
-    public int getIdOffers() {
-        return idOffers;
+    public Feature getFeature() {
+        return feature;
     }
 
-    public void setIdOffers(int idOffers) {
-        this.idOffers = idOffers;
-    }
-
-    public String getEmailUser() {
-        return emailUser;
-    }
-
-    public void setEmailUser(String emailUser) {
-        this.emailUser = emailUser;
-    }
-
-    public int getIdAddresses() {
-        return idAddresses;
-    }
-
-    public void setIdAddresses(int idAddresses) {
-        this.idAddresses = idAddresses;
+    public void setFeature(Feature feature) {
+        this.feature = feature;
     }
 
     public String getPrice() {
@@ -71,11 +68,27 @@ public class Offer implements java.io.Serializable {
         this.price = price;
     }
 
-    public int getIdFeatures() {
-        return idFeatures;
+    public int getIdAddresses() {
+        return idAddresses;
     }
 
-    public void setIdFeatures(int idFeatures) {
-        this.idFeatures = idFeatures;
+    public void setIdAddresses(int idAddresses) {
+        this.idAddresses = idAddresses;
+    }
+
+    public String getEmailUser() {
+        return emailUser;
+    }
+
+    public void setEmailUser(String emailUser) {
+        this.emailUser = emailUser;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
