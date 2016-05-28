@@ -455,13 +455,13 @@
 							<div class="thumbnail">
 								<c:choose>
 									<c:when test="${empty offer.images}">
-										<a class="pull-left" href="${CONTEXT_PATH}/offers/${offer.id}">
+										<a class="pull-left" href="${CONTEXT_PATH}/detail/${offer.id}">
 											<img alt="image" class="img-responsive"
 											src="${CONTEXT_PATH}/resources/img/no-image.jpg">
 										</a>
 									</c:when>
 									<c:otherwise>
-										<a class="pull-left" href="${CONTEXT_PATH}/offers/${offer.id}">
+										<a class="pull-left" href="${CONTEXT_PATH}/detail/${offer.id}">
 											<img alt="image"
 											onerror="this.src='${CONTEXT_PATH}/resources/img/no-image.jpg'"
 											class="img-responsive" src="${offer.images[0].image}">
@@ -472,7 +472,7 @@
 									<h3>${offer.price} €</h3>
 									<p>${offer.feature.propertyType}</p>
 									<p>
-										<a href="${CONTEXT_PATH}/offers/${offer.id}"
+										<a href="${CONTEXT_PATH}/detail/${offer.id}"
 											class="btn btn-danger">More Info</a>
 									</p>
 								</div>
