@@ -11,19 +11,21 @@ public class Offer implements java.io.Serializable {
 
     private String type;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idFeatures", nullable = false)
     private Feature feature;
 
-    @OneToMany(cascade = CascadeType.ALL )
-    @JoinTable(name = "images", joinColumns = { @JoinColumn(name = "idOffers") })
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idAddresses", nullable = false)
+    private Address address;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "offer", fetch = FetchType.EAGER)
     List<Image> images;
 
 
     @Column(name = "price")
     private String price;
-    @Column(name = "idAddresses")
-    private int idAddresses;
+
     @Column(name = "emailUser")
     private String emailUser;
 
@@ -32,11 +34,12 @@ public class Offer implements java.io.Serializable {
     @Column(name = "id")
     private int id;
 
-    public Offer(String type, Feature feature, String price, int idAddresses, String emailUser, int id) {
+    public Offer(String type, Feature feature, Address address, List<Image> images, String price, String emailUser, int id) {
         this.type = type;
         this.feature = feature;
+        this.address = address;
+        this.images = images;
         this.price = price;
-        this.idAddresses = idAddresses;
         this.emailUser = emailUser;
         this.id = id;
     }
@@ -60,20 +63,28 @@ public class Offer implements java.io.Serializable {
         this.feature = feature;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
+
     public String getPrice() {
         return price;
     }
 
     public void setPrice(String price) {
         this.price = price;
-    }
-
-    public int getIdAddresses() {
-        return idAddresses;
-    }
-
-    public void setIdAddresses(int idAddresses) {
-        this.idAddresses = idAddresses;
     }
 
     public String getEmailUser() {
