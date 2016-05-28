@@ -43,7 +43,7 @@ public class OfferServiceImpl implements OfferService{
 	@Override
 	public Long getByPageFilterBySearchSize(String type, String propertyType, String search) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0L;
 	}
 
 	@Override
