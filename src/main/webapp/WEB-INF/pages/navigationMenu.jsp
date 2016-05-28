@@ -11,8 +11,8 @@
 	</div>
 	<!-- /.navbar-header -->
 	<ul class="nav navbar-top-links navbar-left">
-		<li><a href="${CONTEXT_PATH}/offers?type=sale">Sales</a></li>
-		<li><a href="${CONTEXT_PATH}/offers?type=rental">Rentals</a></li>
+		<li><a href="${CONTEXT_PATH}/offers?type=Sale">Sales</a></li>
+		<li><a href="${CONTEXT_PATH}/offers?type=Rent">Rentals</a></li>
 	</ul>
 	<ul class="nav navbar-top-links navbar-right">
 		<security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">

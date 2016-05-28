@@ -464,13 +464,13 @@
 										<a class="pull-left" href="${CONTEXT_PATH}/offers/${offer.id}">
 											<img alt="image"
 											onerror="this.src='${CONTEXT_PATH}/resources/img/no-image.jpg'"
-											class="img-responsive" src="${carAd.images[0].image}">
+											class="img-responsive" src="${offer.images[0].image}">
 										</a>
 									</c:otherwise>
 								</c:choose>
 								<div class="caption">
-									<h3>{{offer.price}}</h3>
-									<p>{{offer.propertyType}}</p>
+									<h3>${offer.price} €</h3>
+									<p>${offer.feature.propertyType}</p>
 									<p>
 										<a href="${CONTEXT_PATH}/offers/${offer.id}"
 											class="btn btn-danger">More Info</a>

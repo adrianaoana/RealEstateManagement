@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public class OfferDAOImpl implements OfferDAO {
-	
+
 	@PersistenceContext
 	private EntityManager entityManager;
 
@@ -92,7 +92,8 @@ public class OfferDAOImpl implements OfferDAO {
 								"SELECT COUNT(1) AS NR"
 										+ " FROM Offer o WHERE o.dateDeleted is null and o.type= :type and o.feature.propertyType= :propertyType "
 										+ " and o.price>= :beginPrice and o.price<= :limitPrice AND (o.type LIKE :search OR o.feature.propertyType LIKE :search "
-										+ " OR o.feature.comfort LIKE :search OR o.feature.devision LIKE :search OR o.price LIKE :search)",
+										+ " OR o.feature.comfort LIKE :search OR o.feature.division LIKE :search OR o.price LIKE :search "
+										+ " OR o.address.street LIKE :search OR o.address.city LIKE :search)",
 								Long.class)
 						.setParameter("type", type).setParameter("propertyType", propertyType)
 						.setParameter("beginPrice", beginPrice).setParameter("limitPrice", limitPrice)
@@ -103,7 +104,8 @@ public class OfferDAOImpl implements OfferDAO {
 						.createQuery(
 								"SELECT COUNT(1) AS NR" + " FROM Offer o WHERE o.dateDeleted is null and o.type= :type "
 										+ " and o.price>= :beginPrice and o.price<= :limitPrice AND (o.type LIKE :search OR o.feature.propertyType LIKE :search "
-										+ " OR o.feature.comfort LIKE :search OR o.feature.devision LIKE :search OR o.price LIKE :search)",
+										+ " OR o.feature.comfort LIKE :search OR o.feature.division LIKE :search OR o.price LIKE :search "
+										+ " OR o.address.street LIKE :search OR o.address.city LIKE :search)",
 								Long.class)
 						.setParameter("type", type).setParameter("beginPrice", beginPrice)
 						.setParameter("limitPrice", limitPrice).setParameter("search", "%" + search + "%")
@@ -117,7 +119,8 @@ public class OfferDAOImpl implements OfferDAO {
 								"SELECT COUNT(1) AS NR"
 										+ " FROM Offer o WHERE o.dateDeleted is null and o.feature.propertyType= :propertyType "
 										+ " and o.price>= :beginPrice and o.price<= :limitPrice AND (o.type LIKE :search OR o.feature.propertyType LIKE :search "
-										+ " OR o.feature.comfort LIKE :search OR o.feature.devision LIKE :search OR o.price LIKE :search)",
+										+ " OR o.feature.comfort LIKE :search OR o.feature.division LIKE :search OR o.price LIKE :search "
+										+ " OR o.address.street LIKE :search OR o.address.city LIKE :search)",
 								Long.class)
 						.setParameter("propertyType", propertyType).setParameter("beginPrice", beginPrice)
 						.setParameter("limitPrice", limitPrice).setParameter("search", "%" + search + "%")
@@ -128,7 +131,8 @@ public class OfferDAOImpl implements OfferDAO {
 						.createQuery(
 								"SELECT COUNT(1) AS NR FROM Offer o WHERE o.dateDeleted is null "
 										+ " and o.price>= :beginPrice and o.price<= :limitPrice AND (o.type LIKE :search OR o.feature.propertyType LIKE :search "
-										+ " OR o.feature.comfort LIKE :search OR o.feature.devision LIKE :search OR o.price LIKE :search)",
+										+ " OR o.feature.comfort LIKE :search OR o.feature.division LIKE :search OR o.price LIKE :search "
+										+ " OR o.address.street LIKE :search OR o.address.city LIKE :search)",
 								Long.class)
 						.setParameter("beginPrice", beginPrice).setParameter("limitPrice", limitPrice)
 						.setParameter("search", "%" + search + "%").getSingleResult();
@@ -144,7 +148,7 @@ public class OfferDAOImpl implements OfferDAO {
 				// nothing is null
 				return entityManager
 						.createQuery(
-								"SELECT new Offer( o.type, o.price, o.idAddresses, o.emailUser, o.id)"
+								"SELECT new Offer( o.type, o.price, o.emailUser, o.dateAdded, o.feature, o.address, o.id)"
 										+ " FROM Offer o WHERE o.dateDeleted is null and o.type= :type and o.feature.propertyType= :propertyType "
 										+ " and o.price>= :beginPrice and o.price<= :limitPrice" + " order by " + order,
 								Offer.class)
@@ -154,7 +158,7 @@ public class OfferDAOImpl implements OfferDAO {
 			} else { // property type is null
 				return entityManager
 						.createQuery(
-								"SELECT new Offer( o.type, o.price, o.idAddresses, o.emailUser, o.id)"
+								"SELECT new Offer( o.type, o.price, o.emailUser, o.dateAdded, o.feature, o.address, o.id)"
 										+ " FROM Offer o WHERE o.dateDeleted is null and o.type= :type "
 										+ " and o.price>= :beginPrice and o.price<= :limitPrice" + " order by " + order,
 								Offer.class)
@@ -167,7 +171,7 @@ public class OfferDAOImpl implements OfferDAO {
 			if (propertyType != null && !propertyType.isEmpty()) {
 				return entityManager
 						.createQuery(
-								"SELECT new Offer( o.type, o.price, o.idAddresses, o.emailUser, o.id)"
+								"SELECT new Offer( o.type, o.price, o.emailUser, o.dateAdded, o.feature, o.address, o.id)"
 										+ " FROM Offer o WHERE o.dateDeleted is null and o.feature.propertyType= :propertyType "
 										+ " and o.price>= :beginPrice and o.price<= :limitPrice" + " order by " + order,
 								Offer.class)
@@ -177,7 +181,7 @@ public class OfferDAOImpl implements OfferDAO {
 			} else {
 				return entityManager
 						.createQuery(
-								"SELECT new Offer( o.type, o.price, o.idAddresses, o.emailUser, o.id)"
+								"SELECT new Offer( o.type, o.price, o.emailUser, o.dateAdded, o.feature, o.address, o.id)"
 										+ " FROM Offer o WHERE o.dateDeleted is null "
 										+ " and o.price>= :beginPrice and o.price<= :limitPrice" + " order by " + order,
 								Offer.class)
@@ -194,22 +198,24 @@ public class OfferDAOImpl implements OfferDAO {
 			if (propertyType != null && !propertyType.isEmpty()) {
 				// nothing is null
 				return entityManager
-						.createQuery("SELECT new Offer( o.type, o.price, o.idAddresses, o.emailUser, o.id)"
+						.createQuery("SELECT new Offer( o.type, o.price, o.emailUser, o.dateAdded, o.feature, o.address, o.id)"
 								+ " FROM Offer o WHERE o.dateDeleted is null and o.type= :type and o.feature.propertyType= :propertyType "
 								+ " and o.price>= :beginPrice and o.price<= :limitPrice AND (o.type LIKE :search OR o.feature.propertyType LIKE :search "
-								+ " OR o.feature.comfort LIKE :search OR o.feature.devision LIKE :search OR o.price LIKE :search)"
-								+ " order by " + order, Offer.class)
+								+ " OR o.feature.comfort LIKE :search OR o.feature.division LIKE :search OR o.price LIKE :search "
+								+ " OR o.address.street LIKE :search OR o.address.city LIKE :search)" + " order by "
+								+ order, Offer.class)
 						.setParameter("type", type).setParameter("propertyType", propertyType)
 						.setParameter("beginPrice", beginPrice).setParameter("limitPrice", limitPrice)
 						.setParameter("search", "%" + search + "%").setFirstResult(offset).setMaxResults(recordsPerPage)
 						.getResultList();
 			} else { // property type is null
 				return entityManager
-						.createQuery("SELECT new Offer( o.type, o.price, o.idAddresses, o.emailUser, o.id)"
+						.createQuery("SELECT new Offer( o.type, o.price, o.emailUser, o.dateAdded, o.feature, o.address, o.id)"
 								+ " FROM Offer o WHERE o.dateDeleted is null and o.type= :type "
 								+ " and o.price>= :beginPrice and o.price<= :limitPrice AND (o.type LIKE :search OR o.feature.propertyType LIKE :search "
-								+ " OR o.feature.comfort LIKE :search OR o.feature.devision LIKE :search OR o.price LIKE :search)"
-								+ " order by " + order, Offer.class)
+								+ " OR o.feature.comfort LIKE :search OR o.feature.division LIKE :search OR o.price LIKE :search "
+								+ " OR o.address.street LIKE :search OR o.address.city LIKE :search)" + " order by "
+								+ order, Offer.class)
 						.setParameter("type", type).setParameter("beginPrice", beginPrice)
 						.setParameter("limitPrice", limitPrice).setParameter("search", "%" + search + "%")
 						.setFirstResult(offset).setMaxResults(recordsPerPage).getResultList();
@@ -218,21 +224,23 @@ public class OfferDAOImpl implements OfferDAO {
 			// type is null
 			if (propertyType != null && !propertyType.isEmpty()) {
 				return entityManager
-						.createQuery("SELECT new Offer( o.type, o.price, o.idAddresses, o.emailUser, o.id)"
+						.createQuery("SELECT new Offer( o.type, o.price, o.emailUser, o.dateAdded, o.feature, o.address, o.id)"
 								+ " FROM Offer o WHERE o.dateDeleted is null and o.feature.propertyType= :propertyType "
 								+ " and o.price>= :beginPrice and o.price<= :limitPrice AND (o.type LIKE :search OR o.feature.propertyType LIKE :search "
-								+ " OR o.feature.comfort LIKE :search OR o.feature.devision LIKE :search OR o.price LIKE :search)"
-								+ " order by " + order, Offer.class)
+								+ " OR o.feature.comfort LIKE :search OR o.feature.division LIKE :search OR o.price LIKE :search "
+								+ " OR o.address.street LIKE :search OR o.address.city LIKE :search)" + " order by "
+								+ order, Offer.class)
 						.setParameter("propertyType", propertyType).setParameter("beginPrice", beginPrice)
 						.setParameter("limitPrice", limitPrice).setParameter("search", "%" + search + "%")
 						.setFirstResult(offset).setMaxResults(recordsPerPage).getResultList();
 			} else {
 				return entityManager
-						.createQuery("SELECT new Offer( o.type, o.price, o.idAddresses, o.emailUser, o.id)"
+						.createQuery("SELECT new Offer( o.type, o.price, o.emailUser, o.dateAdded, o.feature, o.address, o.id)"
 								+ " FROM Offer o WHERE o.dateDeleted is null "
 								+ " and o.price>= :beginPrice and o.price<= :limitPrice AND (o.type LIKE :search OR o.feature.propertyType LIKE :search "
-								+ " OR o.feature.comfort LIKE :search OR o.feature.devision LIKE :search OR o.price LIKE :search)"
-								+ " order by " + order, Offer.class)
+								+ " OR o.feature.comfort LIKE :search OR o.feature.division LIKE :search OR o.price LIKE :search "
+								+ " OR o.address.street LIKE :search OR o.address.city LIKE :search)" + " order by "
+								+ order, Offer.class)
 						.setParameter("beginPrice", beginPrice).setParameter("limitPrice", limitPrice)
 						.setParameter("search", "%" + search + "%").setFirstResult(offset).setMaxResults(recordsPerPage)
 						.getResultList();

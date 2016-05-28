@@ -1,5 +1,6 @@
 package com.squad.service.impl;
 
+import com.squad.dao.ImageDAO;
 import com.squad.dao.OfferDAO;
 import com.squad.model.Offer;
 import com.squad.service.OfferService;
@@ -53,10 +54,10 @@ public class OfferServiceImpl implements OfferService {
 	@Transactional(readOnly = true)
 	public Long getByPageFilterBySearchSize(String type, String propertyType, String beginPrice, String limitPrice,
 			String search) {
-		if (beginPrice != null && !beginPrice.isEmpty()) {
+		if (beginPrice == null || beginPrice.isEmpty()) {
 			beginPrice = "0";
 		}
-		if (limitPrice != null && !limitPrice.isEmpty()) {
+		if (limitPrice == null || limitPrice.isEmpty()) {
 			limitPrice = "9999999";
 		}
 		if (search == null || search.isEmpty()) {
@@ -79,10 +80,10 @@ public class OfferServiceImpl implements OfferService {
 		} else {
 			order = "o.price desc, o.id";
 		}
-		if (beginPrice != null && !beginPrice.isEmpty()) {
+		if (beginPrice == null || beginPrice.isEmpty()) {
 			beginPrice = "0";
 		}
-		if (limitPrice != null && !limitPrice.isEmpty()) {
+		if (limitPrice == null || limitPrice.isEmpty()) {
 			limitPrice = "9999999";
 		}
 		List<Offer> offers;
