@@ -9,7 +9,7 @@
 
 <html>
 <head>
-    <title>$title</title>
+    <title>Offer details</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <c:set var="CONTEXT_PATH" value="<%=request.getContextPath()%>"
     	scope="application" />
@@ -28,6 +28,9 @@
 <body>
 <%@include file="navigationMenu.jsp"%>
 <% com.squad.model.Offer offer = (com.squad.model.Offer) request.getAttribute("offer"); %>
+<% if (offer == null) { %>
+    <div>Error: Offer with the specified id does not exist</div>
+<% } else { %>
 <section id="containerNew">
     <div id="ofertaNew">
         <div class="ofertaBG clearfix">
@@ -38,13 +41,12 @@
 
 
                     <div class="oferta_titleNew">
-                        <h1><%= offer.getType() %></h1>
-                        <h2><span></span></h2>
+                        <h1><%= offer.getType() + " " + offer.getFeature().getPropertyType() + " " + offer.getPrice() + " eur"   %></h1>
+                        <h2><span><%= offer.getAddress().getArea() %></span></h2>
 
                         <div class="oferta_detailsNew">
-                            <strong class="green">$price &euro;</strong>
+                            <strong class="green"><%= offer.getPrice() %> &euro;</strong>
                         </div>
-
                     </div>
                 </div>
                 <!--/oferta left top-->
@@ -53,57 +55,57 @@
                         <h3 class="characteristics">Characteristics</h3>
                         <div class="ocaractNew1">
                             <span class="caractItem"><span class="caractText">Property type:</span> <span
-                                    class="number">$tipProp</span></span>
+                                    class="number"><%= offer.getFeature().getPropertyType() %></span></span>
 
                                <span class="caractItem"> <span class="caractText">Division:</span>
-                                <span class="number">$division</span></span>
+                                <span class="number"><%= offer.getFeature().getDivision() %></span></span>
 
                             <span class="caractItem"><span class="caractText">Comfort:</span> <span
-                                    class="number">$comfort</span></span>
+                                    class="number"><%= offer.getFeature().getComfort() %></span></span>
 
                             <span class="caractItem"><span class="caractText">Floor:</span> <span
-                                    class="number">$floor</span></span>
+                                    class="number"><%= offer.getFeature().getFloor() %></span></span>
 
                             <span class="caractItem"> <span class="caractText">Usable Surface: </span> <span
-                                    class="number">$surface</span>
+                                    class="number"><%= offer.getFeature().getUsableSurface() %></span>
                             </span>
 
                             <span class="caractItem"><span class="caractText">Number of balconies:</span> <span
-                                    class="number">$balconies</span></span>
+                                    class="number"><%= offer.getFeature().getBalconyNo() %></span></span>
 
                             <span class="caractItem"><span class="caractText">Number of rooms:</span> <span
-                                    class="number">$rooms</span></span>
+                                    class="number"><%= offer.getFeature().getRoomNo() %></span></span>
 
                             <span class="caractItem"><span class="caractText">Number of kitchens:</span> <span
-                                    class="number">$kitchens</span></span>
+                                    class="number"><%= offer.getFeature().getKitchenNo() %></span></span>
 
-                            <span class="caractItem"><span class="caractText">Number of garages:</span> <span
-                                    class="number">$garages</span></span>
+                            <span class="caractItem"><span class="caractText">Includes garage:</span> <span
+                                    class="number"><%= offer.getFeature().getGarage() %></span></span>
 
                             <span class="caractItem"><span class="caractText">Parking spaces:</span> <span
-                                    class="number">$parkingspaces</span></span>
+                                    class="number"><%= offer.getFeature().getParkingPlaces() %></span></span>
 
 
                         </div>
                         <div class="ocaractNew1 last">
 
                             <span class="caractItem"><span class="caractText">Street:</span> <span
-                                    class="number">$street</span></span>
+                                    class="number"><%= offer.getAddress().getStreet() %></span></span>
 
                             <span class="caractItem"><span class="caractText">Street number:</span> <span
-                                    class="number">$streetNo</span></span>
+                                    class="number"><%= offer.getAddress().getStreetNo() %></span></span>
 
                             <span class="caractItem"><span class="caractText">Area:</span> <span
-                                    class="number">$area</span></span>
+                                    class="number"><%= offer.getAddress().getArea() %></span></span>
 
                             <span class="caractItem"><span class="caractText">City:</span> <span
-                                    class="number">$city</span></span>
+                                    class="number"><%= offer.getAddress().getCity() %></span></span>
 
                             <span class="caractItem"><span class="caractText">District:</span> <span
-                                    class="number">$district</span></span>
+                                    class="number"><%= offer.getAddress().getDistrict() %></span></span>
 
                             <span class="caractItem"><span class="caractText">Country:</span> <span
-                                    class="number">$country</span></span>
+                                    class="number"><%= offer.getAddress().getCountry() %></span></span>
 
                         </div>
 
@@ -117,7 +119,7 @@
                     <div class="ofertad1 m7 ofertad1New">
                         <h4>Other details</h4>
                         <p>
-                            $details
+                            <%= offer.getDetails() %>
                         </p>
                     </div>
 
@@ -129,23 +131,16 @@
                         <h4>Images</h4>
                         <p>
                         <ul id="slide">
-
-                            <li>
-                                <a href="upload/oferte/327x327/vanzari-apartamente-cluj-buna-ziua-809834.jpg"
-                                   rel="1" onclick="javascript:bigImg(this);return false;"
-                                   class="pic"><img
-                                        src="upload/oferte/131x131/vanzari-apartamente-cluj-buna-ziua-809834.jpg"
-                                        width="600" height="600"
-                                        alt="Thumbnail 1: De vanzare apartament 3 camere, 81 mp, parcare, zona strazii Buna Ziua, Cluj-Napoca,  Buna Ziua"/></a>
-                            </li>
-                            <li>
-                                <a href="upload/oferte/327x327/vanzari-apartamente-cluj-buna-ziua-526243.jpg"
-                                   rel="1" onclick="javascript:bigImg(this);return false;"
-                                   class="pic"><img
-                                        src="upload/oferte/131x131/vanzari-apartamente-cluj-buna-ziua-526243.jpg"
-                                        width="600" height="600"
-                                        alt="Thumbnail 2: De vanzare apartament 3 camere, 81 mp, parcare, zona strazii Buna Ziua, Cluj-Napoca,  Buna Ziua"/></a>
-                            </li>
+                            <% for (com.squad.model.Image image : offer.getImages()) { %>
+                                <li>
+                                <% int length = (int) image.getImage().length(); %>
+                                <% String url = "data:image/*;base64," + com.google.common.io.BaseEncoding.base64().encode(image.getImage().getBytes(1l, length));%>
+                                    <img
+                                    src="<%= url%>"
+                                    width="600" height="600"
+                                    >
+                                </li>
+                            <% } %>
                         </ul>
 
                         </p>
@@ -159,6 +154,6 @@
 
 
 </section>
-<!-- /wrapper -->
+<% } %>
 </body>
 </html>

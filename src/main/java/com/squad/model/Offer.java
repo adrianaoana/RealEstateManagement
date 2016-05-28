@@ -34,7 +34,10 @@ public class Offer implements java.io.Serializable {
     @Column(name = "id")
     private int id;
 
-    public Offer(String type, Feature feature, Address address, List<Image> images, String price, String emailUser, int id) {
+    @Column(name = "details", length = 255)
+    private String details;
+
+    public Offer(String type, Feature feature, Address address, List<Image> images, String price, String emailUser, int id, String details) {
         this.type = type;
         this.feature = feature;
         this.address = address;
@@ -42,6 +45,7 @@ public class Offer implements java.io.Serializable {
         this.price = price;
         this.emailUser = emailUser;
         this.id = id;
+        this.details = details;
     }
 
     public Offer() {
@@ -101,5 +105,13 @@ public class Offer implements java.io.Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 }
