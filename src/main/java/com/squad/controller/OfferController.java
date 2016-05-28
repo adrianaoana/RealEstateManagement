@@ -84,6 +84,16 @@ public class OfferController extends MainController {
 		return modelAndView;
 	}
 
+	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
+	public ModelAndView getDetails(@PathVariable Integer id, HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView(DETAIL_JSP);
+		createMenu(request, modelAndView);
+		Offer offer = offerService.getOfferById(id);
+		modelAndView.addObject(OFFER, offer);
+		return modelAndView;
+	}
+
+
 	@RequestMapping(value = "/add-offer", method = RequestMethod.GET)
 	public ModelAndView add(@ModelAttribute Offer offer, HttpServletRequest request) {
 

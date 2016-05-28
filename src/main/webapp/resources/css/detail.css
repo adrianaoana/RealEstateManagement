@@ -1,0 +1,169 @@
+
+ol,ul {
+    list-style: none;
+}
+
+body {
+    font-family: Tahoma;
+    font-size: 14px;
+    color: #000;
+}
+
+img {
+    border: 0;
+}
+
+
+.m7 {
+    padding: 10px 4px;
+    width: 599px;
+}
+
+.clearfix:after,.caractItem:after {
+    clear: both;
+    content: ' ';
+    display: block;
+    font-size: 0;
+    line-height: 0;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+}
+
+#oferta_leftNew {
+    width: 678px;
+    float: left;
+    padding: 10px 0 20px 10px;
+}
+
+.oferta_leftNewTop {
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.oferta_leftNewTop #oferta_right {
+    float: right;
+    margin-right: 15px;
+}
+
+.oferta_titleNew {
+    width: 285px;
+    float: left;
+    margin-right: 10px;
+}
+
+.oferta_titleNew h1 {
+    font-size: 25px;
+    font-weight: 400;
+    margin: 0 0 9px;
+}
+
+.oferta_titleNew span {
+    font-size: 14px;
+    text-style: italic;
+}
+
+
+.oferta_detailsNew {
+    margin-top: 10px;
+}
+
+.oferta_detailsNew strong {
+    display: block;
+    width: 193px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 13px;
+}
+
+.ofertad1New {
+    width: 665px;
+    border-bottom: 0;
+    margin: 0;
+    padding-top: 7px;
+    padding-bottom: 0;
+    clear: both;
+}
+
+.characteristics {
+    border-bottom: 2px solid #000;
+    padding-bottom: 4px;
+    display: block;
+    font-size: 14px;
+    margin: 0 0 14px;
+    color: #343434;
+}
+
+.ocaractNew1 {
+    width: 317px;
+    float: left;
+    margin-right: 30px;
+}
+
+.ocaractNew1.last {
+    margin: 0;
+}
+
+.ocaractNew1 span.number a,.ocaractNew1 a.number {
+    text-decoration: none;
+}
+
+.ocaractNew1 span.number a:hover,.ocaractNew1 a.number:hover {
+    text-decoration: underline;
+}
+
+.ocaractNew1 span.caractItem,.ocaractNew1 a.caractItem {
+    display: block;
+    padding: 5px 0 5px 15px;
+    color: #000;
+    font-size: 14px;
+}
+
+.ocaractNew1 a.caractItem span.number {
+    color: #000;
+}
+
+
+
+.ocaractNew1 span.caractText,.ocaractNew1 a.caractText {
+    width: 170px;
+    float: left;
+    padding: 0;
+}
+
+.ocaractNew1 a.caractText {
+    text-decoration: none;
+}
+
+.ocaractNew1 a.caractText:hover {
+    text-decoration: underline;
+}
+
+.ocaractNew1 span.number,.ocaractNew1 a.number {
+    float: right;
+    display: block;
+    width: 130px;
+    text-align: left;
+    text-decoration: none;
+}
+
+.ocaractNew1 a.number:hover {
+    text-decoration: underline;
+}
+
+.ofertad1 p {
+    line-height: 18px;
+}
+
+.ofertad1New h4 {
+    border-bottom: 2px solid;
+    padding-bottom: 3px;
+    width: 120px;
+    color: #343434;
+    font-size: 14px;
+}
+
+.extra-details {
+    float: left;
+    font-size: 13px;
+}

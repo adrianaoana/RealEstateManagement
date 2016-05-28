@@ -44,6 +44,7 @@ public class MainController {
 	public static final String INDEX_JSP = "index";
 	public static final String OFFERS_JSP = "offers";
 	public static final String ADD_OFFER_JSP = "addOffer";
+	public static final String DETAIL_JSP = "detail";
 
 	public void createMenu(HttpServletRequest request, ModelAndView modelAndView) {
 		if (request.getSession().getAttribute(USER) == null) {
