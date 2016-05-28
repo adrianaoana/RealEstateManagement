@@ -11,10 +11,8 @@
 	</div>
 	<!-- /.navbar-header -->
 	<ul class="nav navbar-top-links navbar-left">
-		<li class="active"><a href="${CONTEXT_PATH}/">Home</a></li>
-		<li><a href="${CONTEXT_PATH}/">Sales</a></li>
-		<li><a href="${CONTEXT_PATH}/">Rentals</a></li>
-		<li><a href="${CONTEXT_PATH}/">First house 2016</a></li>
+		<li><a href="${CONTEXT_PATH}/offers?type=sales">Sales</a></li>
+		<li><a href="${CONTEXT_PATH}/offers?type=rentals">Rentals</a></li>
 	</ul>
 	<ul class="nav navbar-top-links navbar-right">
 		<security:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
