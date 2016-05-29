@@ -1,14 +1,18 @@
 package com.squad.model;
 
-
 import javax.persistence.*;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "offers")
 public class Offer implements java.io.Serializable {
-    @Column(name = "type")
 
+    @Column(name = "type")
     private String type;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -22,30 +26,41 @@ public class Offer implements java.io.Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "offer", fetch = FetchType.EAGER)
     List<Image> images;
 
-
     @Column(name = "price")
     private String price;
 
     @Column(name = "emailUser")
     private String emailUser;
 
+    @DateTimeFormat(iso = ISO.NONE)
+    @Temporal(TemporalType.DATE)
+    @Column(name = "date_added")
+    private Date dateAdded;
+
+    @DateTimeFormat(iso = ISO.NONE)
+    @Temporal(TemporalType.DATE)
+    @Column(name = "date_deleted")
+    private Date dateDeleted;
+
+    @Column(name = "detail", length = 255)
+    private String details;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "details", length = 255)
-    private String details;
-
-    public Offer(String type, Feature feature, Address address, List<Image> images, String price, String emailUser, int id, String details) {
+    public Offer(String type, Feature feature, Address address, List<Image> images, String price, String emailUser, Date dateAdded, Date dateDeleted, String details, int id) {
         this.type = type;
         this.feature = feature;
         this.address = address;
         this.images = images;
         this.price = price;
         this.emailUser = emailUser;
-        this.id = id;
+        this.dateAdded = dateAdded;
+        this.dateDeleted = dateDeleted;
         this.details = details;
+        this.id = id;
     }
 
     public Offer() {
@@ -99,12 +114,20 @@ public class Offer implements java.io.Serializable {
         this.emailUser = emailUser;
     }
 
-    public int getId() {
-        return id;
+    public Date getDateAdded() {
+        return dateAdded;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDateAdded(Date dateAdded) {
+        this.dateAdded = dateAdded;
+    }
+
+    public Date getDateDeleted() {
+        return dateDeleted;
+    }
+
+    public void setDateDeleted(Date dateDeleted) {
+        this.dateDeleted = dateDeleted;
     }
 
     public String getDetails() {
@@ -113,5 +136,13 @@ public class Offer implements java.io.Serializable {
 
     public void setDetails(String details) {
         this.details = details;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
