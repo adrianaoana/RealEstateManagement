@@ -120,13 +120,25 @@
 				</div>
 			</div>
 			<div align="center" class="row">
-				<a type="button" class="btn btn-labeled btn-danger"
-					href="${CONTEXT_PATH}/add-offer"> <span
-					class="glyphicon glyphicon-plus"></span> Add offer
-				</a> <a type="button" class="btn btn-labeled btn-danger"
-					href="${CONTEXT_PATH}/add-offer"> <span
-					class="glyphicon glyphicon-question-sign"></span> Ask offer
-				</a>
+				<security:authorize access="!hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+					<a type="button" class="btn btn-labeled btn-danger" href="#"> <span
+						class="glyphicon glyphicon-plus"></span> Add offer
+					</a>
+					<a type="button" class="btn btn-labeled btn-danger" href="#"> <span
+						class="glyphicon glyphicon-question-sign"></span> Ask offer
+					</a>
+				</security:authorize>
+				<!-- If logged in, display add page -->
+				<security:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+					<a type="button" class="btn btn-labeled btn-danger"
+						href="${CONTEXT_PATH}/add-offer"> <span
+						class="glyphicon glyphicon-plus"></span> Add offer
+					</a>
+					<a type="button" class="btn btn-labeled btn-danger"
+						href="${CONTEXT_PATH}/add-offer"> <span
+						class="glyphicon glyphicon-question-sign"></span> Ask offer
+					</a>
+				</security:authorize>
 			</div>
 			<!-- /.row -->
 			<hr />
