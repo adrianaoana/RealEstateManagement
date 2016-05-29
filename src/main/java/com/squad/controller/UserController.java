@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.squad.model.User;
@@ -77,4 +79,44 @@ public class UserController extends MainController {
 		userService.delete(email);
 		return new ModelAndView("redirect:/");
 	}
+
+	@RequestMapping(value = "user", method = RequestMethod.GET)
+	public ModelAndView userForm(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView(USER_PROFILE_JSP);
+		createMenu(request, modelAndView);
+		modelAndView.addObject(USER, userService.getByEmail(request.getUserPrincipal().getName()));
+		return modelAndView;
+
+	}
+
+	@RequestMapping(value = "user/settings", method = RequestMethod.GET)
+	public ModelAndView userSettingsForm(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView(USER_SETTINGS_JSP);
+		modelAndView.addObject(USER, userService.getByEmail(request.getUserPrincipal().getName()));
+		return modelAndView;
+
+	}
+
+	@RequestMapping(value = "user/settings", method = RequestMethod.POST)
+	public ModelAndView userUpdate(@ModelAttribute @Validated User user, BindingResult bindingResult,
+			HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView(USER_SETTINGS_JSP);
+		if (bindingResult.hasErrors()) {
+			modelAndView.addObject(USER, user);
+			return modelAndView;
+		}
+		userService.update(user);
+		createMenu(request, modelAndView);
+		modelAndView.addObject(USER, userService.getByEmail(request.getUserPrincipal().getName()));
+		return modelAndView;
+
+	}
+
+	@RequestMapping(value = "user/change-password", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Integer updatePassword(@RequestParam("password") String password, HttpServletRequest request) {
+		userService.updatePassword(request.getUserPrincipal().getName(), password);
+		return 0;
+	}
+
 }

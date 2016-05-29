@@ -125,12 +125,13 @@
 				</div>
 			</div>
 			<div align="center" class="row">
-				<button type="button" class="btn btn-success">
-					<span class="glyphicon glyphicon-plus"></span> Add offer
-				</button>
-				<button type="button" class="btn btn-success">
-					<span class="glyphicon glyphicon-question-sign"></span> Ask offer
-				</button>
+				<a type="button" class="btn btn-labeled btn-danger"
+					href="${CONTEXT_PATH}/add-offer"> <span
+					class="glyphicon glyphicon-plus"></span> Add offer
+				</a> <a type="button" class="btn btn-labeled btn-danger"
+					href="${CONTEXT_PATH}/add-offer"> <span
+					class="glyphicon glyphicon-question-sign"></span> Ask offer
+				</a>
 			</div>
 			<!-- /.row -->
 			<hr />

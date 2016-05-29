@@ -49,8 +49,8 @@
 	<http auto-config="false" use-expressions="true"
 		entry-point-ref="loginUrlAuthenticationEntryPoint" create-session="ifRequired">
 		<intercept-url pattern="/user/**" access="isAuthenticated()" />
-		<intercept-url pattern="/add-ad" access="isAuthenticated()" />
-		<intercept-url pattern="/delete-ad" access="isAuthenticated()" />
+		<intercept-url pattern="/add-offer" access="isAuthenticated()" />
+		<intercept-url pattern="/delete-offer" access="isAuthenticated()" />
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/**" access="permitAll" />
 

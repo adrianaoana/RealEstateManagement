@@ -21,11 +21,11 @@
 					class="fa fa-newspaper-o fa-fw"></i> <i class="fa fa-caret-down"></i>
 			</a>
 				<ul class="dropdown-menu dropdown-alerts">
-					<li><a href="${CONTEXT_PATH}/user/favorites"> <i
+					<li><a href="#"> <i
 							class="fa fa-star-half-o fa-fw"></i> Favorites
 					</a></li>
 					<li class="divider"></li>
-					<li><a href="${CONTEXT_PATH}/user/ads"> <i
+					<li><a href="#"> <i
 							class="fa fa-list-alt fa-fw"></i> My ads
 					</a></li>
 				</ul> <!-- /.dropdown-alerts --></li>
