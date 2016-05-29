@@ -2,13 +2,12 @@ package com.squad.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.squad.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.squad.model.User;
-import com.squad.service.UserService;
-import com.squad.service.OfferService;
 
 @Controller
 public class MainController {
@@ -18,6 +17,15 @@ public class MainController {
 	
 	@Autowired
 	protected OfferService offerService;
+
+	@Autowired
+	protected AddressService addressService;
+
+	@Autowired
+	protected FeatureService featureService;
+
+	@Autowired
+	protected ImageService imageService;
 
 	public static final String ERROR_MESSAGE = "errorMessage";
 	public static final String MESSAGE = "message";
